@@ -1,8 +1,8 @@
-using NUnit.Framework;
-using Cab_Fare_Problem;
-
 namespace Cab_Fare_Test
-{
+{ 
+    using Cab_Fare_Problem;
+    using NUnit.Framework;
+
     public class Tests
     { 
         [SetUp]
@@ -10,8 +10,9 @@ namespace Cab_Fare_Test
         {
         }
 
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-
+        /// <summary>
+        /// UC-1.1 : Given Distance and Time should return total Monthly Fare
+        /// </summary>
         [Test]
         public void GivenDistanceAndTime_ShouldReturnMonthlyFare()
         {
@@ -21,6 +22,9 @@ namespace Cab_Fare_Test
             Assert.AreEqual(25, result);
         }
 
+        /// <summary>
+        /// UC-1.2 : Given Distance and Time if total Fare is Less then should return Minimum Fare
+        /// </summary>
         [Test]
         public void GivenLessDistanceAndTime_ShouldReturnMinimumFare()
         {
@@ -30,12 +34,13 @@ namespace Cab_Fare_Test
             Assert.AreEqual(5, result);
         }
 
+        /// <summary>
+        /// UC-2 : Given Multiple Rides Should Return Total Fare
+        /// </summary>
         [Test]
         public void GivenMultipleRide_ShouldReturnTotalFare()
         {     
-            Ride[] rides = { new Ride(2.0, 5),
-                             new Ride(0.1, 1),
-                            };
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
             double fare = InvoiceGenerator.CalculateFare(rides);
             Assert.AreEqual(30, fare);
         }

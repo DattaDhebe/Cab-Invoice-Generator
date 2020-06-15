@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-
-namespace Cab_Fare_Problem
+﻿namespace Cab_Fare_Problem
 {
+    using System;
+
     public class InvoiceGenerator
     {
-        public static int Minimum_Cost_Per_Time = 10;
-        public static double Cost_Per_Time = 1;
-        public static double Minimum_Fare = 5;
+        private static int minimumCostPerTime = 10;
+        private static double costPerTime = 1;
+        private static double minimumFare = 5;
 
+        /// <summary>
+        /// Function for Calculating totalFare 
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static double CalculateFare(double distance, int time)
         {
-            double totalFare = distance * Minimum_Cost_Per_Time + time * Cost_Per_Time;
-            return Math.Max(totalFare, Minimum_Fare);
+            double totalFare = (distance * minimumCostPerTime) + (time * costPerTime);
+            return Math.Max(totalFare, minimumFare);
         }
 
+        /// <summary>
+        /// Calculate Fare for multiple Rides
+        /// </summary>
+        /// <param name="rides"></param>
+        /// <returns></returns>
         public static double CalculateFare(Ride[] rides)
         {
             double totalFare = 0;

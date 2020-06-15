@@ -6,4 +6,11 @@
     <RootNamespace>Cab_Fare_Problem</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="InvoiceGenerator.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+  </ItemGroup>
+
 </Project>
