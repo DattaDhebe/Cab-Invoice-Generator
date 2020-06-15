@@ -15,9 +15,7 @@ namespace Cab_Fare_Problem
         public static double CalculateFare(double distance, int time)
         {
             double totalFare = distance * Minimum_Cost_Per_Time + time * Cost_Per_Time;
-            if (totalFare < Minimum_Fare)
-                return Minimum_Fare;
-            return totalFare;
+            return Math.Max(totalFare, Minimum_Fare);
         }
 
         public static double CalculateFare(Ride[] rides)
