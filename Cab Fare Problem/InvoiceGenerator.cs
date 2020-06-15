@@ -25,14 +25,14 @@
         /// </summary>
         /// <param name="rides"></param>
         /// <returns></returns>
-        public static double CalculateFare(Ride[] rides)
+        public InvoiceSummary CalculateFare(Ride[] rides)
         {
             double totalFare = 0;
             foreach (Ride ride in rides)
             {
                 totalFare += CalculateFare(ride.distance, ride.time);
             }
-            return totalFare;
+            return new InvoiceSummary(rides.Length, totalFare);
         }
     }
 }

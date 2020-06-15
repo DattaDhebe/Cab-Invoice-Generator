@@ -39,10 +39,16 @@ namespace Cab_Fare_Test
         /// </summary>
         [Test]
         public void GivenMultipleRide_ShouldReturnTotalFare()
-        {     
-            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-            double fare = InvoiceGenerator.CalculateFare(rides);
-            Assert.AreEqual(30, fare);
+        {
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            Ride[] rides = { 
+                             new Ride(2.0, 5), 
+                             new Ride(0.1, 1) 
+            };
+
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+            Assert.AreEqual(expectedInvoiceSummary, summary);
         }
     }
 }
