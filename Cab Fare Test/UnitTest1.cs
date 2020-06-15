@@ -18,5 +18,14 @@ namespace Cab_Fare_Test
             double result = InvoiceGenerator.CalculateFare(distance, time);
             Assert.AreEqual(25, result);
         }
+
+        [Test]
+        public void GivenLessDistanceAndTime_ShouldReturnMinimumFare()
+        {
+            double distance = 0.1;
+            int time = 1;
+            double result = InvoiceGenerator.CalculateFare(distance, time);
+            Assert.AreEqual(5, result);
+        }
     }
 }
