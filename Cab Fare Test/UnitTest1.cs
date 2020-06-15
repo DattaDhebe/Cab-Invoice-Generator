@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Cab_Fare_Problem;
 
 namespace Cab_Fare_Test
 {
@@ -10,9 +11,12 @@ namespace Cab_Fare_Test
         }
 
         [Test]
-        public void Test1()
+        public void GivenDistanceAndTime_ShouldReturnMonthlyFare()
         {
-            Assert.Pass();
+            double distance = 2.0;
+            int time = 5;
+            double result = InvoiceGenerator.CalculateFare(distance, time);
+            Assert.AreEqual(25, result);
         }
     }
 }
