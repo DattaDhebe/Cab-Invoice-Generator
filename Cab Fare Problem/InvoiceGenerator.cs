@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 
@@ -16,6 +17,16 @@ namespace Cab_Fare_Problem
             double totalFare = distance * Minimum_Cost_Per_Time + time * Cost_Per_Time;
             if (totalFare < Minimum_Fare)
                 return Minimum_Fare;
+            return totalFare;
+        }
+
+        public static double CalculateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            foreach (Ride ride in rides)
+            {
+                totalFare += CalculateFare(ride.distance, ride.time);
+            }
             return totalFare;
         }
     }
