@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cab_Fare_Problem
+﻿namespace Cab_Fare_Problem
 {
     public class InvoiceSummary
     {
