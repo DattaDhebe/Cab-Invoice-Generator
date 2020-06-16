@@ -5,6 +5,7 @@
     public class InvoiceService
     {
         public const int MinimumCostPerTime = 10;
+        public const int PremiumCostPerTime = 15;
         public const double CostPerTime = 1;
         public const double MinimumFare = 5;
         private RideRepository rideRepository;
@@ -24,7 +25,7 @@
             double totalFare = (distance * MinimumCostPerTime) + (time * CostPerTime);
             return Math.Max(totalFare, MinimumFare);
         }
-
+      
         /// <summary>
         /// Calculate Fare for multiple Rides
         /// </summary>
@@ -38,7 +39,7 @@
                 totalFare += CalculateFare(ride.distance, ride.time);
             }
             return new InvoiceSummary(rides.Length, totalFare);
-        }
+        }       
 
         /// <summary>
         /// Add Rides TO Ride Repository
@@ -58,6 +59,22 @@
         public InvoiceSummary GetInvoiceSummary(string userId)
         {
             return this.CalculateFare(rideRepository.GetRides(userId));
+        }
+
+        public static double PremiumCalculateFare(double distance, int time)
+        {
+            double totalFare = (distance * PremiumCostPerTime) + (time * CostPerTime);
+            return Math.Max(totalFare, MinimumFare);
+        }
+
+        public InvoiceSummary PremiumCalculateFare(PremiumRide[] premiumRides)
+        {
+            double totalFare = 0;
+            foreach (PremiumRide ride in premiumRides)
+            {
+                totalFare += PremiumCalculateFare(ride.distance, ride.time);
+            }
+            return new InvoiceSummary(premiumRides.Length, totalFare);
         }
     }
 }

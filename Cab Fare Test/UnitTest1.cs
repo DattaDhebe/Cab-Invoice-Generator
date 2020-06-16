@@ -68,5 +68,17 @@ namespace Cab_Fare_Test
             InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
             Assert.AreEqual(expectedInvoiceSummary, summary); 
         }
+
+        [Test]
+        public void GivenNormalAndPremiumRides_WhenCalculated_shouldReturnInvoiceSummary()
+        {
+            PremiumRide[] premiumRides = {
+                            new PremiumRide(2.0, 5),
+                            new PremiumRide(0.1, 1)
+            };
+            InvoiceSummary premiumRideSummary = invoiceService.PremiumCalculateFare(premiumRides);
+            InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 40.0);
+            Assert.AreEqual(expectedInvoiceSummary, premiumRideSummary);
+        }
     }
 }

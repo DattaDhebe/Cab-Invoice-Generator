@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Cab_Fare_Problem
 {
-    public class Ride
+    public class PremiumRide
     {
         public double distance;
         public int time;
 
-        public Ride(double distance, int time)
+        public PremiumRide(double distance, int time)
         {
             this.distance = distance;
             this.time = time;
