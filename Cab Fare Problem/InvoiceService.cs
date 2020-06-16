@@ -61,12 +61,23 @@
             return this.CalculateFare(rideRepository.GetRides(userId));
         }
 
+        /// <summary>
+        /// function to calculating total fare for premium rides
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static double PremiumCalculateFare(double distance, int time)
         {
             double totalFare = (distance * PremiumCostPerTime) + (time * CostPerTime);
             return Math.Max(totalFare, MinimumFare);
         }
 
+        /// <summary>
+        /// calculate fare for multiple Premium Rides
+        /// </summary>
+        /// <param name="premiumRides"></param>
+        /// <returns></returns>
         public InvoiceSummary PremiumCalculateFare(PremiumRide[] premiumRides)
         {
             double totalFare = 0;

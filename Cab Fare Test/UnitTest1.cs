@@ -19,9 +19,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenDistanceAndTime_WhenCalculated_ShouldReturnMonthlyFare()
         {
-            double distance = 2.0;
-            int time = 5;
-            double result = InvoiceService.CalculateFare(distance, time);
+            double result = InvoiceService.CalculateFare(2.0, 5);
             Assert.AreEqual(25, result);
         }
 
@@ -31,9 +29,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenLessDistanceAndTime_WhenCalculated_ShouldReturnMinimumFare()
         {
-            double distance = 0.1;
-            int time = 1;
-            double result = InvoiceService.CalculateFare(distance, time);
+            double result = InvoiceService.CalculateFare(0.1, 1);
             Assert.AreEqual(5, result);
         }
 
@@ -53,7 +49,7 @@ namespace Cab_Fare_Test
         }
 
         /// <summary>
-        /// Given UserId and Rides When Calculated should return invoice summary
+        /// Given UserId and Rides When Calculated should return Invoice summary
         /// </summary>
         [Test]
         public void GivenUserIdAndRides_WhenCalculated_shouldReturnInvoiceSummary()
@@ -69,8 +65,31 @@ namespace Cab_Fare_Test
             Assert.AreEqual(expectedInvoiceSummary, summary); 
         }
 
+        /// <summary>
+        /// Given Distance and Time For Premium ride should return total Monthly Fare
+        /// </summary>
         [Test]
-        public void GivenNormalAndPremiumRides_WhenCalculated_shouldReturnInvoiceSummary()
+        public void GivenDistanceAndTimeForPremiumRide_WhenCalculated_ShouldReturnMonthlyFare()
+        {
+            double result = InvoiceService.PremiumCalculateFare(2.0, 5);
+            Assert.AreEqual(35, result);
+        }
+
+        /// <summary>
+        /// Given Distance and Time for premium ride if total Fare is Less then should return Minimum Fare
+        /// </summary>
+        [Test]
+        public void GivenLessDistanceAndTimeForPremiumRide_WhenCalculated_ShouldReturnMinimumFare()
+        {
+            double result = InvoiceService.PremiumCalculateFare(0.1, 1);
+            Assert.AreEqual(5, result);
+        }
+
+        /// <summary>
+        /// Given Premium Rides when calculated should return Invoice summary
+        /// </summary>
+        [Test]
+        public void GivenPremiumRides_WhenCalculated_shouldReturnInvoiceSummary()
         {
             PremiumRide[] premiumRides = {
                             new PremiumRide(2.0, 5),
