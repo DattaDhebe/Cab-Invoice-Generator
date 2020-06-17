@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cab_Fare_Problem
+﻿namespace Cab_Fare_Problem
 {
     public class Ride
     {
+        public InvoiceService.Travel travel;
         public double distance;
         public int time;
 
-        public Ride(double distance, int time)
+        public Ride(InvoiceService.Travel travel, double distance, int time)
         {
+            this.travel = travel;
             this.distance = distance;
             this.time = time;
         }
