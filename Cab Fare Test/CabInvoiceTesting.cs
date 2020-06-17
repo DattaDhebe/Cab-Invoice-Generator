@@ -1,16 +1,33 @@
+//-----------------------------------------------------------------------
+// <copyright file="CabInvoiceTesting.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Datta Dhebe</author>
+//-----------------------------------------------------------------------
+
 namespace Cab_Fare_Test
-{ 
+{
+    using System;
     using Cab_Fare_Problem;
     using NUnit.Framework;
 
-    public class Tests
+    /// <summary>
+    /// Class For Writing Test Cases
+    /// </summary>
+    public class CabInvoiceTesting
     {
-        InvoiceService invoiceService = null;
+        /// <summary>
+        ///  Creation of InvoiceService Object
+        /// </summary>
+        private InvoiceService invoiceService = null;
 
+        /// <summary>
+        /// Assign InvoiceService Class Object
+        /// </summary>
         [SetUp]
         public void Setup()
         {
-            invoiceService = new InvoiceService();
+            this.invoiceService = new InvoiceService();
         }
 
         /// <summary>
@@ -19,7 +36,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenDistanceAndTime_WhenCalculated_ShouldReturnMonthlyFare()
         {
-            double actual = invoiceService.CalculateFare(InvoiceService.Travel.Normal, 2.0, 5);
+            double actual = this.invoiceService.CalculateFare(InvoiceService.Travel.Normal, 2.0, 5);
             double expected = 25;
             Assert.AreEqual(expected, actual);
         }
@@ -30,7 +47,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenLessDistanceAndTime_WhenCalculated_ShouldReturnMinimumFare()
         {
-            double actual = invoiceService.CalculateFare(InvoiceService.Travel.Normal, 0.1, 1);
+            double actual = this.invoiceService.CalculateFare(InvoiceService.Travel.Normal, 0.1, 1);
             double expected = 5;
             Assert.AreEqual(expected, actual);
         }
@@ -41,11 +58,12 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenMultipleRide_WhenCalculated_ShouldReturnTotalFare()
         {
-            Ride[] rides = { 
-                             new Ride(InvoiceService.Travel.Normal, 2.0, 5), 
-                             new Ride(InvoiceService.Travel.Normal, 0.1, 1) 
-            };
-            InvoiceSummary summary = invoiceService.CalculateFare(rides);
+            Ride[] rides = 
+                            { 
+                                new Ride(InvoiceService.Travel.Normal, 2.0, 5), 
+                                new Ride(InvoiceService.Travel.Normal, 0.1, 1) 
+                            };
+            InvoiceSummary summary = this.invoiceService.CalculateFare(rides);
             InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
             Assert.AreEqual(expectedInvoiceSummary, summary);
         }
@@ -57,12 +75,13 @@ namespace Cab_Fare_Test
         public void GivenUserIdAndRides_WhenCalculated_shouldReturnInvoiceSummary()
         {            
             string userId = "abc@gmail.com";
-            Ride[] rides = {
-                             new Ride(InvoiceService.Travel.Normal, 2.0, 5),
-                             new Ride(InvoiceService.Travel.Normal, 0.1, 1)
-            };
-            invoiceService.AddRides(userId, rides);
-            InvoiceSummary summary = invoiceService.GetInvoiceSummary(userId);
+            Ride[] rides = 
+                        {
+                            new Ride(InvoiceService.Travel.Normal, 2.0, 5),
+                            new Ride(InvoiceService.Travel.Normal, 0.1, 1)
+                        };
+            this.invoiceService.AddRides(userId, rides);
+            InvoiceSummary summary = this.invoiceService.GetInvoiceSummary(userId);
             InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
             Assert.AreEqual(expectedInvoiceSummary, summary); 
         }
@@ -73,7 +92,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenDistanceAndTimeForPremiumRide_WhenCalculated_ShouldReturnMonthlyFare()
         {
-            double actual = invoiceService.CalculateFare(InvoiceService.Travel.Premium, 2.0, 5);
+            double actual = this.invoiceService.CalculateFare(InvoiceService.Travel.Premium, 2.0, 5);
             double expected = 40;
             Assert.AreEqual(expected, actual);
         }
@@ -84,7 +103,7 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenLessDistanceAndTimeForPremiumRide_WhenCalculated_ShouldReturnMinimumFare()
         {
-            double actual = invoiceService.CalculateFare(InvoiceService.Travel.Premium, 0.1, 1);
+            double actual = this.invoiceService.CalculateFare(InvoiceService.Travel.Premium, 0.1, 1);
             double expected = 20;
             Assert.AreEqual(expected, actual);
         }
@@ -95,30 +114,32 @@ namespace Cab_Fare_Test
         [Test]
         public void GivenPremiumRides_WhenCalculated_shouldReturnInvoiceSummary()
         {
-            Ride[] rides = {
-                             new Ride(InvoiceService.Travel.Premium, 2.0, 5),
-                             new Ride(InvoiceService.Travel.Premium, 0.1, 1)
-            };
-            InvoiceSummary premiumRideSummary = invoiceService.CalculateFare(rides);
+            Ride[] rides = 
+                        {
+                            new Ride(InvoiceService.Travel.Premium, 2.0, 5),
+                            new Ride(InvoiceService.Travel.Premium, 0.1, 1)
+                        };
+            InvoiceSummary premiumRideSummary = this.invoiceService.CalculateFare(rides);
             InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 60.0);
             Assert.AreEqual(expectedInvoiceSummary, premiumRideSummary);
         }
 
         /// <summary>
-        /// Given Premium and Normal Rides When Calcualated whe
+        /// Given Premium and Normal Rides When Calculated should return Invoice Summary
         /// </summary>
         [Test]
         public void GivenPremiumAndNormalRides_WhenCalculated_shouldReturnInvoiceSummary()
         {
             string userId = "abc@gmail.com";
-            Ride[] rides = {
+            Ride[] rides = 
+                        {
                              new Ride(InvoiceService.Travel.Normal, 2.0, 5),
                              new Ride(InvoiceService.Travel.Normal, 0.1, 1),
                              new Ride(InvoiceService.Travel.Premium, 2.0, 5),
                              new Ride(InvoiceService.Travel.Premium, 0.1, 1)
-            };
-            invoiceService.AddRides(userId, rides);
-            InvoiceSummary summary = invoiceService.GetInvoiceSummary(userId);
+                        };
+            this.invoiceService.AddRides(userId, rides);
+            InvoiceSummary summary = this.invoiceService.GetInvoiceSummary(userId);
             InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(4, 90.0);
             Assert.AreEqual(expectedInvoiceSummary, summary);
         }
@@ -132,16 +153,14 @@ namespace Cab_Fare_Test
             try
             {
                 string userId = "abc@gmail.com";
-                Ride[] rides = {  };
-                invoiceService.AddRides(userId, rides);
-                InvoiceSummary summary = invoiceService.GetInvoiceSummary(userId);
-                InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(0, 60.0);
-                
+                Ride[] rides = { };
+                this.invoiceService.AddRides(userId, rides);
+                InvoiceSummary summary = this.invoiceService.GetInvoiceSummary(userId); 
             }
             catch (CabInvoiceException e)
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.Empty_data, e.Message);
             }
-        }
+        }      
     }
 }
