@@ -124,28 +124,24 @@ namespace Cab_Fare_Test
         }
 
         /// <summary>
-        /// Given Premium Rides when calculated should return Custom Exception
+        /// Given Empty Rides when calculated should return Custom Exception
         /// </summary>
         [Test]
-        public void GivenPremiumRides_WhenCalculated_shouldReturnCustomException()
+        public void GivenEmptyRides_WhenCalculated_shouldReturnCustomException()
         {
             try
             {
-                string userId = "";
-                Ride[] rides = {
-                             new Ride(InvoiceService.Travel.Premium, 2.0, 5),
-                             new Ride(InvoiceService.Travel.Premium, 0.1, 1)
-                };
+                string userId = "abc@gmail.com";
+                Ride[] rides = {  };
                 invoiceService.AddRides(userId, rides);
                 InvoiceSummary summary = invoiceService.GetInvoiceSummary(userId);
-                InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 60.0);
+                InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(0, 60.0);
                 
             }
-            catch (CabInvoiceException)
+            catch (CabInvoiceException e)
             {
-                throw new CabInvoiceException(CabInvoiceException.ExceptionType.Wrong_User_Id, "");
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.Empty_data, e.Message);
             }
         }
-
     }
 }
