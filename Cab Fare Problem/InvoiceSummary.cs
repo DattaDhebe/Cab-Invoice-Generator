@@ -27,6 +27,11 @@ namespace Cab_Fare_Problem
         /// </summary>
         private double averageFare;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoiceSummary" /> class and also find Average Fare.
+        /// </summary>
+        /// <param name="numOfRides">Find Number Of Rides</param>
+        /// <param name="totalFare">To calculate total fare</param>
         public InvoiceSummary(int numOfRides, double totalFare)
         {
             this.numOfRides = numOfRides;
@@ -34,14 +39,23 @@ namespace Cab_Fare_Problem
             this.averageFare = this.totalFare / this.numOfRides;
         }
 
+        /// <summary>
+        /// Method to find Equals
+        /// </summary>
+        /// <param name="obj">use object in Invoice Summary to compare</param>
+        /// <returns>Return Equal values</returns>
         public override bool Equals(object obj)
         {
             return obj is InvoiceSummary summary &&
-                   numOfRides == summary.numOfRides &&
-                   totalFare == summary.totalFare &&
-                   averageFare == summary.averageFare;
+                   this.numOfRides == summary.numOfRides &&
+                   this.totalFare == summary.totalFare &&
+                   this.averageFare == summary.averageFare;
         }
 
+        /// <summary>
+        /// Method to return HashCode Of base Method
+        /// </summary>
+        /// <returns>Return HashCode Of Base Method</returns>
         public override int GetHashCode()
         {
             return base.GetHashCode();
