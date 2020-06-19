@@ -161,6 +161,40 @@ namespace Cab_Fare_Test
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.Empty_data, e.Message);
             }
-        }      
+        }
+
+        /// <summary>
+        /// Given Wrong UserId when Validated should return Custom Exception
+        /// </summary>
+        [Test]
+        public void GivenWrongUserId_WhenValidated_shouldReturnCustomException() 
+        {
+            try
+            {
+                string userId = "@gmail.com";
+                Assert.Throws<CabInvoiceException>(() => invoiceService.ValidateUserId(userId)); 
+            }
+            catch (CabInvoiceException e)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.Wrong_User_Id, e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Given Wrong UserId with Numbers and Dot when validated should return Custom Exception
+        /// </summary>
+        [Test]
+        public void GivenWrongUserIdWithNumbersAndDot_WhenValidated_shouldReturnCustomException()
+        {
+            try
+            {
+                string userId = "123.@gmail.com";
+                Assert.Throws<CabInvoiceException>(() => invoiceService.ValidateUserId(userId));
+            }
+            catch (CabInvoiceException e)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.Wrong_User_Id, e.Message);
+            }
+        }
     }
 }

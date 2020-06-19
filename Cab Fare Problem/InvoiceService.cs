@@ -151,7 +151,7 @@ namespace Cab_Fare_Problem
             try
             {
                 // if userId is Right then calculate Fare
-                bool userIdCheck = this.Email(userId);
+                bool userIdCheck = this.ValidateUserId(userId);
                 if (userIdCheck == true)
                 {
                     this.rideRepository.AddRide(userId, rides);
@@ -173,7 +173,7 @@ namespace Cab_Fare_Problem
             try
             {
                 //// if userId is Right then calculate Fare
-                bool userIdCheck = this.Email(userId);
+                bool userIdCheck = this.ValidateUserId(userId);
                 if (userIdCheck == true)
                 {
                     //// calculate and return Fare of that User Id
@@ -193,10 +193,12 @@ namespace Cab_Fare_Problem
         /// </summary>
         /// <param name="email">validation of Email Id as User Id</param>
         /// <returns>if valid it returns true</returns>
-        public bool Email(string email)
+        public bool ValidateUserId(string email)
         {
             // check if Given Userd Id Matches the pattern or not
-            return Regex.Match(email, patternForEmail).Success;
+            if (Regex.Match(email, patternForEmail).Success)
+                return true;
+            throw new CabInvoiceException(CabInvoiceException.ExceptionType.Wrong_User_Id, "Enter RIght User Id");
         }
     }
 }
