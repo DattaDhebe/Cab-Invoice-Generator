@@ -75,6 +75,7 @@ namespace Cab_Fare_Test
         public void GivenUserIdAndRides_WhenCalculated_shouldReturnInvoiceSummary()
         {            
             string userId = "abc@gmail.com";
+            this.invoiceService.ValidateUserId(userId);
             Ride[] rides = 
                         {
                             new Ride(InvoiceService.Travel.Normal, 2.0, 5),
@@ -131,6 +132,7 @@ namespace Cab_Fare_Test
         public void GivenPremiumAndNormalRides_WhenCalculated_shouldReturnInvoiceSummary()
         {
             string userId = "abc@gmail.com";
+            this.invoiceService.ValidateUserId(userId);
             Ride[] rides = 
                         {
                              new Ride(InvoiceService.Travel.Normal, 2.0, 5),
@@ -153,6 +155,7 @@ namespace Cab_Fare_Test
             try
             {
                 string userId = "abc@gmail.com";
+                this.invoiceService.ValidateUserId(userId);
                 Ride[] rides = { };
                 this.invoiceService.AddRides(userId, rides);
                 InvoiceSummary summary = this.invoiceService.GetInvoiceSummary(userId); 
@@ -172,7 +175,7 @@ namespace Cab_Fare_Test
             try
             {
                 string userId = "@gmail.com";
-                Assert.Throws<CabInvoiceException>(() => invoiceService.ValidateUserId(userId)); 
+                Assert.Throws<CabInvoiceException>(() => this.invoiceService.ValidateUserId(userId)); 
             }
             catch (CabInvoiceException e)
             {
@@ -189,7 +192,7 @@ namespace Cab_Fare_Test
             try
             {
                 string userId = "123.@gmail.com";
-                Assert.Throws<CabInvoiceException>(() => invoiceService.ValidateUserId(userId));
+                Assert.Throws<CabInvoiceException>(() => this.invoiceService.ValidateUserId(userId));
             }
             catch (CabInvoiceException e)
             {
