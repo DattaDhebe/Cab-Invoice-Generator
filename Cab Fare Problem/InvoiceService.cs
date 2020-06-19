@@ -135,7 +135,7 @@ namespace Cab_Fare_Problem
             foreach (Ride ride in rides)
             {
                 // calculate total Fare by Using CalculateFare function
-                totalFare += this.CalculateFare(ride.travel, ride.distance, ride.time);
+                totalFare += this.CalculateFare(ride.Travel, ride.Distance, ride.Time);
             }
 
             return new InvoiceSummary(rides.Length, totalFare);

@@ -13,19 +13,19 @@ namespace Cab_Fare_Problem
     public class Ride
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvoiceService" /> class.
+        /// Gets or sets aInitializes a new instance of the <see cref="InvoiceService" /> class.
         /// </summary>
-        public InvoiceService.Travel travel;
+        public InvoiceService.Travel Travel { get; set; }
 
-        /// <summary>
-        /// Variable declaration for Distance
+        /// <summary> 
+        /// Gets or sets a variable Indicating Distance for Ride
         /// </summary>
-        public double distance;
+        public double Distance { get; set; }
 
-        /// <summary>
-        /// Variable declaration for Time
+        /// <summary> 
+        /// Gets or sets a variable Indicating Time for Ride
         /// </summary>
-        public int time;
+        public int Time { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ride" /> class.
@@ -35,9 +35,9 @@ namespace Cab_Fare_Problem
         /// <param name="time">time Required to travel</param>
         public Ride(InvoiceService.Travel travel, double distance, int time)
         {
-            this.travel = travel;
-            this.distance = distance;
-            this.time = time;
+            this.Travel = travel;
+            this.Distance = distance;
+            this.Time = time;
         }
     }
 }
